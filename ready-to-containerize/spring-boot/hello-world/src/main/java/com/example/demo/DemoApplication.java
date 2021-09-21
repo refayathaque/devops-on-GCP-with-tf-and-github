@@ -11,7 +11,7 @@ public class DemoApplication {
 
 	@RequestMapping("/")
   public String home() {
-    return "Hello Docker World";
+    return "hello world";
   }
 
 	public static void main(String[] args) {
@@ -20,5 +20,3 @@ public class DemoApplication {
 }
 
 // added RequestMapping and RestController code from https://spring.io/guides/gs/spring-boot-docker/
-// to build and run this app with Maven and Apache Tomcat modify the command in the guide above with values found in pom.xml
-// mvn package && java -jar target/${artifactId}-${version}.jar
