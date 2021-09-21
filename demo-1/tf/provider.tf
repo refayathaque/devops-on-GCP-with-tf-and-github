@@ -1,5 +1,6 @@
 provider "google" {
-  project     = "wbtg63wxu"
-  region      = "us-east4"
+  project     = var.project
+  region      = var.region
+  zone        = var.zone
   credentials = "${var.service_account_key_dir}/${var.service_account_key}"
 }
