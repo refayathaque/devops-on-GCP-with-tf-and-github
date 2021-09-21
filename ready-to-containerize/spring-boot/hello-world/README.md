@@ -12,12 +12,12 @@ main files to look at:
 - `pom.xml`
 - `Dockerfile`
 
-building and running this app locally (on http://localhost:8080/) with Maven and Apache Tomcat:
+building and running this app locally (on http://localhost:8080) with Maven and Apache Tomcat:
 
 - `mvn package && java -jar target/${artifactId}-${version}.jar`
   - command is from [guide](https://spring.io/guides/gs/spring-boot-docker/), `artifactId` and `version` values are in `pom.xml`
 
-pushing image to GCP container registry:
+pushing image to Container Registry:
 
 - `docker build -t hello-world`
 - `docker image ls`
