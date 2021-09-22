@@ -18,7 +18,7 @@
   - Do not have passwords, and cannot log in via browsers or cookies.
   - Associated with **private/public RSA key-pairs that are used for authentication** to Google.
     - Each service account is associated with two sets of public/private RSA key pairs that are used to authenticate to Google: [Google-managed keys, and user-managed keys](https://cloud.google.com/iam/docs/service-accounts#service_account_keys).
-    - Need to have `service-account-key` as JSON file (I think this is an example of user-managed keys...not entirely sure...) when using Terraform to make infrastructure-related API calls from local machine to GCP
+    - Need to have `service-account-key` as JSON file (I think this is an example of user-managed keys...not entirely sure...) when using tf to make infrastructure-related API calls from local machine to GCP
   - [Types](https://cloud.google.com/iam/docs/service-accounts#types)
     - [Google-managed service accounts](https://cloud.google.com/iam/docs/service-accounts#google-managed)
       - Some Google Cloud services need access to your resources so that they can act on your behalf. _For example, when you use Cloud Run to run a container, the service needs access to any Pub/Sub topics that can trigger the container. To meet this need, Google creates and manages service accounts for many Google Cloud services._

@@ -3,7 +3,7 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
-# code above taken from https://spring.io/guides/gs/spring-boot-docker/
+# code above, and steps below, found in https://spring.io/guides/gs/spring-boot-docker/
 # docker build -t hello-world
 # This command builds an image and tags it as "hello-world"
 # docker run --publish 8080:8080 hello-world

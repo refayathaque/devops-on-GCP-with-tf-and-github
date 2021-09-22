@@ -1,3 +1,3 @@
-resource "google_service_account" "hello_world_service_account" {
-  account_id = "hello-world-service-account"
+resource "google_service_account" "demo_1_service_account" {
+  account_id = "demo-1-service-account"
 }

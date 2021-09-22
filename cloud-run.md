@@ -1,3 +1,5 @@
+notes below are from another repo, so some files/general things might not make sense
+
 # [Cloud Run](https://cloud.google.com/run/docs/quickstarts)
 
 - Cloud Run is a managed compute platform that enables you to run containers that are invocable via requests or events. Cloud Run is serverless: it abstracts away all infrastructure management, so you can focus on what matters most — building great applications.
@@ -27,6 +29,4 @@
   - Also has configuration to make service publically accessible
 
 <!-- commands -->
-
-<!-- gcloud builds submit --tag gcr.io/wbtg63wxu/pubsubspringbootcontainer -->
-<!-- gcloud pubsub topics publish xqknmacmkn-my-run-topic --message "World" -->
+<!-- gcloud pubsub topics publish ${topic} --message "World" -->
