@@ -13,7 +13,7 @@ resource "google_pubsub_subscription" "demo_2_subscription" {
     push_endpoint = google_cloud_run_service.demo_2_service.status[0].url
     # list/array syntax above from here: https://github.com/mozammal/spring-boot-sample-blog-terraform-sql-gcloud-run/blob/4b5d37de2f2d08eb6030ae50b71231151be5c63f/terraform/spring-boot-blog-terraform-sql-gcloud-run-service.tf
     oidc_token {
-      service_account_email = google_service_account.demo_2_service_account.email
+      service_account_email = google_service_account.demo_2_cloud_run_service_account.email
     }
     # https://cloud.google.com/pubsub/docs/push#authentication_and_authorization
   }

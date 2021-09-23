@@ -30,3 +30,7 @@ notes below are from another repo, so some files/general things might not make s
 
 <!-- commands -->
 <!-- gcloud pubsub topics publish ${topic} --message "World" -->
+
+### Helpful links:
+
+- Good Cloud Run [guide](https://ruanmartinelli.com/posts/terraform-cloud-run) for easy _public_ service configuration

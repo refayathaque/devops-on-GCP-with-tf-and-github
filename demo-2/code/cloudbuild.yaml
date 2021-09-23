@@ -10,8 +10,8 @@ steps:
       [
         "build",
         "-t",
-        "gcr.io/wbtg63wxu/hello-world",
-        "--build-arg=JAR_FILE=target/hello-world-1.0.0.jar",
+        "gcr.io/wbtg63wxu/demo-2",
+        "--build-arg=JAR_FILE=target/demo-2-1.0.0.jar",
         ".",
       ]
   - name: gcr.io/cloud-builders/gcloud
@@ -19,13 +19,13 @@ steps:
       [
         "run",
         "deploy",
-        "hello-world",
+        "demo-2",
         "--image",
-        "gcr.io/wbtg63wxu/hello-world:latest",
+        "gcr.io/wbtg63wxu/demo-2:latest",
         "--region",
         "us-east4",
       ]
-images: ["gcr.io/wbtg63wxu/hello-world"]
+images: ["gcr.io/wbtg63wxu/demo-2"]
 # mostly taken from https://github.com/GoogleCloudPlatform/cloud-build-samples/blob/main/maven-example/cloudbuild.yaml
 # guide to understand steps - https://cloud.google.com/build/docs/building/build-java
 # gcloud commands to deploy Cloud Run service found here: https://dzone.com/articles/cicd-using-google-cloud-build-and-google-cloud-run
