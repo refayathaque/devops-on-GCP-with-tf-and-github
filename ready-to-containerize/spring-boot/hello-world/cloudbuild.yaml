@@ -10,10 +10,13 @@ steps:
       [
         "build",
         "-t",
-        "gcr.io/wbtg63wxu/hello-world",
+        "gcr.io/wbtg63wxu/hello-world:latest",
         "--build-arg=JAR_FILE=target/hello-world-1.0.0.jar",
         ".",
       ]
+    # push container to container registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/wbtg63wxu/hello-world:latest"]
   - name: gcr.io/cloud-builders/gcloud
     args:
       [

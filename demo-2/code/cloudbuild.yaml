@@ -10,10 +10,13 @@ steps:
       [
         "build",
         "-t",
-        "gcr.io/wbtg63wxu/demo-2",
+        "gcr.io/wbtg63wxu/demo-2:latest",
         "--build-arg=JAR_FILE=target/demo-2-1.0.0.jar",
         ".",
       ]
+    # push container to container registry
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/wbtg63wxu/demo-2:latest"]
   - name: gcr.io/cloud-builders/gcloud
     args:
       [
