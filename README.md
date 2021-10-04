@@ -39,3 +39,10 @@ Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud 
 Tasks and notes:
 
 1. Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
+
+## _demo-4_
+
+Objective: Set up API Gateway with GET that returns "hello world" from Java Spring Boot Cloud Run service
+Tasks and notes:
+
+1. Write tf code
