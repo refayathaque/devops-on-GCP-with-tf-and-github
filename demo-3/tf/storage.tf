@@ -10,3 +10,4 @@ resource "google_storage_bucket" "demo_3_dataflow_temp_bucket" {
   location      = "us-east4"
   force_destroy = true
 }
+# KEK will go here ^

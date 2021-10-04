@@ -39,6 +39,10 @@ Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud 
 Tasks and notes:
 
 1. Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
+2. Download sample files ✅
+3. Create a dataset in BigQuery where the Cloud DLP pipeline can store the de-identified (tokenized) data - Write tf code for dataset and table ✅
+   - A [dataset](https://cloud.google.com/bigquery/docs/datasets-intro#datasets) is contained within a specific project. Datasets are top-level containers that are used to organize and control access to your tables and views. A table or view must belong to a dataset, so you need to create at least one dataset before loading data into BigQuery.
+4. Create a key encryption key (KEK) using Cloud Build - Write tf code
 
 ## _demo-4_
 
