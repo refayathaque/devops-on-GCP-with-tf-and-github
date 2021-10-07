@@ -1,10 +1,10 @@
-resource "google_api_gateway_api" "demo_4" {
+resource "google_api_gateway_api" "demo_1" {
   provider = google-beta
   api_id   = "demo-${var.demo}-api"
 }
-resource "google_api_gateway_api_config" "demo_4" {
+resource "google_api_gateway_api_config" "demo_1" {
   provider      = google-beta
-  api           = google_api_gateway_api.demo_4.api_id
+  api           = google_api_gateway_api.demo_1.api_id
   api_config_id = "demo-1-api-cfg"
   openapi_documents {
     document {
@@ -16,11 +16,11 @@ resource "google_api_gateway_api_config" "demo_4" {
     create_before_destroy = true
   }
 }
-resource "google_api_gateway_gateway" "demo_4" {
+resource "google_api_gateway_gateway" "demo_1" {
   provider   = google-beta
-  api_config = google_api_gateway_api_config.demo_4.id
+  api_config = google_api_gateway_api_config.demo_1.id
   gateway_id = "demo-${var.demo}-gateway"
 }
 output "api_gateway_gateway_default_hostname" {
-  value = google_api_gateway_gateway.demo_4.default_hostname
+  value = google_api_gateway_gateway.demo_1.default_hostname
 }

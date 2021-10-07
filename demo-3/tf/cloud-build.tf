@@ -2,7 +2,7 @@
 
 # https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/blob/master/dlp-demo-part-1-crypto-key.yaml - but skipping key ring and key creation steps because using tf for those
 
-# resource "google_cloudbuild_trigger" "demo_4_trigger" {
+# resource "google_cloudbuild_trigger" "demo_3_trigger" {
 #   name = "demo-${var.demo}-trigger"
 #   build {
 #     step {

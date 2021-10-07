@@ -1,3 +1,5 @@
 vars.tf
 .terraform*
 terraform*
+node_modules
+vars.js

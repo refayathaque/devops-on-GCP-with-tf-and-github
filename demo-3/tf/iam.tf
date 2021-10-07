@@ -1,4 +1,4 @@
-resource "google_project_iam_binding" "demo_4_binding_kms_encrypter_for_build" {
+resource "google_project_iam_binding" "demo_3_binding_kms_encrypter_for_build" {
   project = var.project
   role    = "roles/cloudkms.cryptoKeyEncrypter"
   members = [
@@ -6,7 +6,7 @@ resource "google_project_iam_binding" "demo_4_binding_kms_encrypter_for_build" {
   ]
 }
 
-resource "google_project_iam_binding" "demo_4_binding_kms_admin_for_build" {
+resource "google_project_iam_binding" "demo_3_binding_kms_admin_for_build" {
   project = var.project
   role    = "roles/cloudkms.admin"
   members = [

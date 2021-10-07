@@ -2,19 +2,20 @@ Code divided by projects (not in the GCP resource hierarchy "project" sense), pr
 
 Naming convention:
 
-- GCP resources: e.g., demo-2, `this-bucket-does-something`, service-to-query-sql, database-for-cars
-- tf resources: e.g., pubsub_demo_service, `database_for_cars`, demo_5_pubsub_topic
+- GCP resources: e.g., demo-2, `this-bucket-does-something`, service-to-query-sql, database-for-cars (kebab-case)
+- tf resources: e.g., pubsub_demo_service, `database_for_cars`, demo_5_pubsub_topic (snake_case)
 - java files/projects: no dashes or underscores (because I personally don't know what's allowed and what's not)
+- React demos' resources: `PascaleCase`, e.g., Demo1
 - tasks's status indicated with ✅/❌/🚧
 
 ## _demo-1_
 
-Objective: React app makes unauth'ed GET to API Gateway, API Gateway forwards request to Java Spring Boot Cloud Run service, service responds with "hello world", React app displays response data\
+Objective: Make an unauth'ed GET request to API Gateway, API Gateway forwards request to Java Spring Boot Cloud Run service, service responds with "hello world"\
 Tasks & notes:
 
 1. Hit service URL to make sure everything is working and the container returns a string ✅\
    _Not using a custom "demo-1" container image, using "hello-world" from ready-to-containerize dir_
-2. Configure tf and API Gateway OpenAPI `spec.yaml`, using [this](https://cloud.google.com/api-gateway/docs/get-started-cloud-run) as guide ✅\
+2. Configure tf and API Gateway OpenAPI `spec.yaml`, using [this](https://cloud.google.com/api-gateway/docs/get-started-cloud-run) as guide ✅
 
 ## _demo-2_
 
@@ -36,7 +37,7 @@ Tasks & notes:
 
 ## _demo-3_ (on hold)
 
-Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud DLP templates to store the transformation configuration. _I.e., what's [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset)_
+Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud DLP templates to store the transformation configuration. _I.e., what's [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset)_\
 Tasks and notes:
 
 1. Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
@@ -48,3 +49,14 @@ Tasks and notes:
 ## _demo-4_
 
 Something to do with networking - VPCs, etc.
+
+# React:
+
+## _Demo1_
+
+Objective: Allow users to create, list, update and destroy buckets\
+Tasks and notes:
+
+1. Create service account for app with custom role to only do the above, download `.json` key and use for making requests
+2. Create 5 dummy buckets so app has something to GET
+3. Create a `.js` file to test SDK
