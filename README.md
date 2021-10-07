@@ -100,4 +100,4 @@ Tasks and notes:
   _GET_\
   _POST_\
   _PUT/PATCH_\
-  _DESTROY_\
+  _DESTROY_
