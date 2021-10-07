@@ -14,7 +14,7 @@ Objective: Make an unauth'ed GET request to API Gateway, API Gateway forwards re
 Tasks & notes:
 
 1. Hit service URL to make sure everything is working and the container returns a string ✅\
-   _Not using a custom "demo-1" container image, using "hello-world" from ready-to-containerize dir_
+   _Not using a custom "demo-1" container image, using some derivative of "hello-world" from ready-to-containerize dir (I say derivative because the service returns "Hello Docker World")_
 2. Configure tf and API Gateway OpenAPI `spec.yaml`, using [this](https://cloud.google.com/api-gateway/docs/get-started-cloud-run) as guide ✅
 
 ## _demo-2_
@@ -22,15 +22,15 @@ Tasks & notes:
 Objective: Spring Boot Cloud Run service responds with message received from Pub/Sub, check service logs to validate, Pub/Sub message should be logged - using code (with modifications, e.g., not using jib to build, so had to create a Dockerfile) from [here](https://github.com/GoogleCloudPlatform/java-docs-samples/tree/master/run/pubsub)\
 Tasks & notes:
 
-1. Run `docker build -t demo-2 .` to validate Dockerfile ✅\
+- Run `docker build -t demo-2 .` to validate Dockerfile ✅\
    _this is actually useless from config validation perspective, when running tf you could still get the Cloud Run service provisioning to error_
-2. Create cloud-run, cloud-build, source-repo, iam, provider, vars, pubsub tf files ✅
-3. Push container image to Container Registry ✅
-4. Run tf code ✅\
+- Create cloud-run, cloud-build, source-repo, iam, provider, vars, pubsub tf files ✅
+- Push container image to Container Registry ✅
+- Run tf code ✅\
    _pom.xml `artifactId` and `name` is **demo2**, same as what's in Dockerfile preceding `.jar` and also on the top of Java files (e.g., `package com.example.demo2;`) this consistency is important otherwise you'll get errors when building the service_
-5. Publish a message with command `gcloud pubsub topics publish demo-2-topic --message "World"` and validate in Cloud Run service logs ✅
-6. Add `cloudbuild.yaml` to source code and validate in Cloud Build that container image is built and pushed to Container Registry ✅
-7. Make changes to source code and validate in Cloud Run service logs that Cloud Build built a new image ✅\
+- Publish a message with command `gcloud pubsub topics publish demo-2-topic --message "World"` and validate in Cloud Run service logs ✅
+- Add `cloudbuild.yaml` to source code and validate in Cloud Build that container image is built and pushed to Container Registry ✅
+- Make changes to source code and validate in Cloud Run service logs that Cloud Build built a new image ✅\
    _[Step 6](https://dzone.com/articles/cicd-using-google-cloud-build-and-google-cloud-run)_\
    _[Deploying a new revision of an existing service](https://cloud.google.com/run/docs/deploying#revision)_\
    _[How to set up IAM resources](https://stackoverflow.com/a/62783880)_
@@ -40,23 +40,29 @@ Tasks & notes:
 Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud DLP templates to store the transformation configuration. _I.e., what's [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset)_\
 Tasks and notes:
 
-1. Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
-2. Download sample files ✅
-3. Create a dataset in BigQuery where the Cloud DLP pipeline can store the de-identified (tokenized) data - Write tf code for dataset and table ✅
-   - A [dataset](https://cloud.google.com/bigquery/docs/datasets-intro#datasets) is contained within a specific project. Datasets are top-level containers that are used to organize and control access to your tables and views. A table or view must belong to a dataset, so you need to create at least one dataset before loading data into BigQuery.
-4. Create a key encryption key (KEK) using Cloud Build - Write tf code 🚧
+- Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
+- Download sample files ✅
+- Create a dataset in BigQuery where the Cloud DLP pipeline can store the de-identified (tokenized) data - Write tf code for dataset and table ✅\
+   _A [dataset](https://cloud.google.com/bigquery/docs/datasets-intro#datasets) is contained within a specific project. Datasets are top-level containers that are used to organize and control access to your tables and views. A table or view must belong to a dataset, so you need to create at least one dataset before loading data into BigQuery._
+- Create a key encryption key (KEK) using Cloud Build - Write tf code 🚧
 
 ## _demo-4_
 
 Something to do with networking - VPCs, etc.
 
-# React:
+# Infrastructure for React apps:
 
 ## _Demo1_
 
-Objective: Allow users to create, list, update and destroy buckets\
+Objective: Allow users to create, list, update and destroy buckets (Essentially creating a proper backend with API Gateway and multiple microservices for each operation type)\
 Tasks and notes:
 
-1. Create service account for app with custom role to only do the above, download `.json` key and use for making requests
-2. Create 5 dummy buckets so app has something to GET
-3. Create a `.js` file to test SDK
+- To understand how to build node.js container images with express.js, create a simple one and deploy using gcloud commands - use [this](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs) as guide
+- Create 4 service accounts (for each microservice) (with custom roles if need be) to only do the above
+- Create 5 dummy buckets so there is something to GET when the app first loads
+- Create a `.js` file to test SDK locally before implementing in microservices
+- Create 4 node.js containerized images that will serve as the microservices\
+  _GET_\
+  _POST_\
+  _PUT/PATCH_\
+  _DESTROY_\
