@@ -6,6 +6,7 @@ Naming convention:
 - tf resources: e.g., pubsub_demo_service, `database_for_cars`, demo_5_pubsub_topic (snake_case)
 - java files/projects: no dashes or underscores (because I personally don't know what's allowed and what's not)
 - React demos' resources: `PascaleCase`, e.g., Demo1
+- everything else: `kebab-case`
 - tasks's status indicated with ✅/❌/🚧
 
 ## _demo-1_
@@ -52,12 +53,46 @@ Something to do with networking - VPCs, etc.
 
 # Infrastructure for React apps:
 
+## How to build a simple node.js microservice, based on stuff from [here](https://expressjs.com/en/starter/installing.html), [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs) and [here](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/9804b07efb2fb207c2e3515e844431c130e6c7b2/run/helloworld/Dockerfile)
+
+- create a folder, cd into that folder, run `npm init` (just hit enter through everything)
+- at the bottom of the `package.json` file add property `"type": "module"`
+- run `npm install express --save`
+- create an `index.js` file with the following content inside
+
+```
+import express from 'express'
+const app = express();
+app.get('/', (req, res) => {
+  const name = process.env.NAME || 'World';
+  res.send(`Hello ${name}!`);
+});
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`helloworld: listening on port ${port}`);
+});
+```
+
+- create a `Dockerfile` with the following content inside
+
+```
+FROM node:14-slim
+WORKDIR /usr/src/app
+COPY package*.json ./
+RUN npm install --only=production
+COPY . ./
+CMD [ "node", "index.js" ]
+```
+
+- run `gcloud run deploy`
+
 ## _Demo1_
 
 Objective: Allow users to create, list, update and destroy buckets (Essentially creating a proper backend with API Gateway and multiple microservices for each operation type)\
 Tasks and notes:
 
-- To understand how to build node.js container images with express.js, create a simple one and deploy using gcloud commands - use [this](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs) as guide
+- To understand how to build node.js container images with express.js, create a simple one and deploy using gcloud commands - use [this](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs) as guide ✅\
+   *Get Dockerfile from [here](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/9804b07efb2fb207c2e3515e844431c130e6c7b2/run/helloworld/Dockerfile)*✅\
 - Create 4 service accounts (for each microservice) (with custom roles if need be) to only do the above
 - Create 5 dummy buckets so there is something to GET when the app first loads
 - Create a `.js` file to test SDK locally before implementing in microservices
