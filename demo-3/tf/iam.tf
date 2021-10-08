@@ -1,15 +1,21 @@
-resource "google_project_iam_binding" "demo_3_binding_kms_encrypter_for_build" {
-  project = var.project
-  role    = "roles/cloudkms.cryptoKeyEncrypter"
+resource "google_service_account" "demo_3_bigquery" {
+  account_id = "demo-${var.demo}-bigquery-sa"
+}
+
+resource "google_bigquery_dataset_iam_binding" "demo_3" {
+  dataset_id = google_bigquery_dataset.demo_3.dataset_id
+  role       = "roles/storage.objectViewer"
   members = [
-    "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+    "serviceAccount:${google_service_account.demo_3_bigquery.name}",
   ]
 }
 
-resource "google_project_iam_binding" "demo_3_binding_kms_admin_for_build" {
-  project = var.project
-  role    = "roles/cloudkms.admin"
+resource "google_bigquery_table_iam_binding" "demo_3" {
+  project    = google_bigquery_table.demo_3.project
+  dataset_id = google_bigquery_table.demo_3.dataset_id
+  table_id   = google_bigquery_table.demo_3.table_id
+  role       = "roles/storage.objectViewer"
   members = [
-    "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+    "serviceAccount:${google_service_account.demo_3_bigquery.name}",
   ]
 }

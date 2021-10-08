@@ -36,16 +36,19 @@ Tasks & notes:
    _[Deploying a new revision of an existing service](https://cloud.google.com/run/docs/deploying#revision)_\
    _[How to set up IAM resources](https://stackoverflow.com/a/62783880)_
 
-## _demo-3_ (on hold)
+## _demo-3_
 
-Objective: Design a Cloud DLP transformation for a sample dataset. Create Cloud DLP templates to store the transformation configuration. _I.e., what's [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset)_\
+Objective: Inspect a BigQuery table using the Data Loss Prevention API using Pub/Sub for job notifications.\
 Tasks and notes:
 
-- Write tf code for buckets - The first bucket stores the sample dataset and the second bucket stores temporary data for the automated pipeline ✅
-- Download sample files ✅
-- Create a dataset in BigQuery where the Cloud DLP pipeline can store the de-identified (tokenized) data - Write tf code for dataset and table ✅\
-   _A [dataset](https://cloud.google.com/bigquery/docs/datasets-intro#datasets) is contained within a specific project. Datasets are top-level containers that are used to organize and control access to your tables and views. A table or view must belong to a dataset, so you need to create at least one dataset before loading data into BigQuery._
-- Create a key encryption key (KEK) using Cloud Build - Write tf code 🚧
+- Get sample data from [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset#downloading_the_sampledatas)
+- Create tf resources for bucket and object, object will be a single csv file from the sample data retrieved above
+- Create tf resources for BigQuery dataset and table, configure table to get sample data from bucket created above
+  - _Get table schema from [here](https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/tree/master/terraform_setup) (repo is assoicated with Cloud Architecture Center tutorial, link above in "Get sample data from")_
+- Create tf IAM resources for BigQuery to access sample data object in bucket
+  - "When you load data into BigQuery, you need permissions to run a load job and permissions that let you load data into new or existing BigQuery tables and partitions. If you are loading data from Cloud Storage, you also need permissions to access to the bucket that contains your data." - [Doc](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#required_permissions)
+- Create tf resources for Pub/Sub topic and subscription
+- Output all resource ids, you'll need when running the DLP-BigQuery node.js [script](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectBigQuery.js)
 
 ## _demo-4_
 
