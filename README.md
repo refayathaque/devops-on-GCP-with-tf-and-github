@@ -5,7 +5,7 @@ Naming convention:
 - GCP resources: e.g., demo-2, `this-bucket-does-something`, service-to-query-sql, database-for-cars (kebab-case)
 - tf resources: e.g., pubsub_demo_service, `database_for_cars`, demo_5_pubsub_topic (snake_case)
 - java files/projects: no dashes or underscores (because I personally don't know what's allowed and what's not)
-- React demos' resources: `PascaleCase`, e.g., Demo1
+- React demos' resources: e.g., react-demo-1
 - everything else: `kebab-case`
 - tasks's status indicated with ✅/❌/🚧
 
@@ -54,7 +54,7 @@ Tasks and notes:
 
 Something to do with networking - VPCs, etc.
 
-# Infrastructure for React apps:
+# Infrastructure for React apps, i.e., backends for frontend apps:
 
 ### How to build a simple node.js microservice, based on stuff from [here](https://expressjs.com/en/starter/installing.html), [here](https://cloud.google.com/run/docs/quickstarts/build-and-deploy/nodejs) and [here](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/9804b07efb2fb207c2e3515e844431c130e6c7b2/run/helloworld/Dockerfile)
 
@@ -77,6 +77,7 @@ app.listen(port, () => {
 ```
 
 - create a `Dockerfile` with the following content inside
+  - actually this is [not necessary](https://cloud.google.com/run/docs/deploying-source-code) - "If a Dockerfile is present in the source code directory, the uploaded source code is built using that Dockerfile. If no Dockerfile is present in the source code directory, Google Cloud buildpacks automatically detects the language you are using and fetches the dependencies of the code to make a production-ready container image, using a secure base image managed by Google. (Each time you deploy, any needed security fixes are automatically picked up from the base image.)"
 
 ```
 FROM node:14-slim
@@ -89,7 +90,7 @@ CMD [ "node", "index.js" ]
 
 - run `gcloud run deploy`
 
-## _Demo1_
+## _react-demo-1_
 
 Objective: Allow users to create, list, update and destroy buckets (Essentially creating a proper backend with API Gateway and multiple microservices for each operation type)\
 Tasks and notes:
@@ -98,7 +99,7 @@ Tasks and notes:
    *Get Dockerfile from [here](https://github.com/GoogleCloudPlatform/nodejs-docs-samples/blob/9804b07efb2fb207c2e3515e844431c130e6c7b2/run/helloworld/Dockerfile)*✅\
 - Create 4 service accounts (for each microservice) (with custom roles if need be) to only do the above
 - Create 5 dummy buckets so there is something to GET when the app first loads
-- Create a `.js` file to test SDK locally before implementing in microservices
+- Create a `.js` file to test SDK locally before implementing in microservices ✅
 - Create 4 node.js containerized images that will serve as the microservices\
   _GET_\
   _POST_\
