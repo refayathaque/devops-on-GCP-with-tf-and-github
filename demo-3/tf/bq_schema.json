@@ -64,5 +64,29 @@
     "mode": "NULLABLE",
     "name": "card_type_code",
     "type": "STRING"
+  },
+  {
+    "description": "age",
+    "mode": "NULLABLE",
+    "name": "age",
+    "type": "STRING"
+  },
+  {
+    "description": "social_security_number",
+    "mode": "NULLABLE",
+    "name": "social_security_number",
+    "type": "STRING"
+  },
+  {
+    "description": "job_title",
+    "mode": "NULLABLE",
+    "name": "job_title",
+    "type": "STRING"
+  },
+  {
+    "description": "additional_information",
+    "mode": "NULLABLE",
+    "name": "additional_information",
+    "type": "STRING"
   }
 ]

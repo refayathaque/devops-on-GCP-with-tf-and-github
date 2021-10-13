@@ -29,7 +29,7 @@ Tasks & notes:
 - Push container image to Container Registry ✅
 - Run tf code ✅\
    _pom.xml `artifactId` & `name` is **demo2**, same as what's in Dockerfile preceding `.jar` & also on the top of Java files (e.g., `package com.example.demo2;`) this consistency is important otherwise you'll get errors when building the service_
-- Publish a message with comm& `gcloud pubsub topics publish demo-2-topic --message "World"` & validate in Cloud Run service logs ✅
+- Publish a message with command `gcloud pubsub topics publish demo-2-topic --message "World"` & validate in Cloud Run service logs ✅
 - Add `cloudbuild.yaml` to source code & validate in Cloud Build that container image is built & pushed to Container Registry ✅
 - Make changes to source code & validate in Cloud Run service logs that Cloud Build built a new image ✅\
    _[Step 6](https://dzone.com/articles/cicd-using-google-cloud-build-&-google-cloud-run)_\
@@ -41,17 +41,19 @@ Tasks & notes:
 Objective: Inspect a BigQuery table using the Data Loss Prevention API using Pub/Sub for job notifications.\
 Tasks & notes:
 
-- Get sample data from [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset#downloading_the_sampledatas)
-- Create tf resources for bucket & object, object will be a single csv file from the sample data retrieved above
-- Create tf resources for BigQuery dataset, table & load job
-  - _Get table schema from [here](https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/tree/master/terraform_setup) (repo is assoicated with Cloud Architecture Center tutorial, link above in "Get sample data from")_
-  - [Load jobs](https://cloud.google.com/bigquery/docs/loading-data). Load data from Cloud Storage or from a local file by creating a load job. The records can be in Avro, CSV, JSON, ORC, or Parquet format.
-- Create tf IAM resources for BigQuery to access sample data object in bucket & execute load job
-  - "When you load data into BigQuery, you need permissions to run a load job & permissions that let you load data into new or existing BigQuery tables & partitions. If you are loading data from Cloud Storage, you also need permissions to access to the bucket that contains your data." - [Doc](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#required_permissions)
-- Create tf resources for Pub/Sub topic & subscription
-- Deploy infrastructure pieces made thus far to be able to perform local testing
+- Get sample data from [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset#downloading_the_sampledatas) ✅
+- Create tf resources for bucket & object, object will be a single csv file from the sample data retrieved above ✅
+- Create tf resources for BigQuery dataset, table & data transfer ✅
+  - Get table schema from [here](https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/tree/master/terraform_setup) (repo is assoicated with Cloud Architecture Center tutorial, link above in "Get sample data from") ✅
+    - _But it's incorrect - missing 4 columns, which I added myself by looking at the sample data csv, use `bq_schema.json` in project `tf` dir_
+  - `data_path_template` requires [specific format](https://stackoverflow.com/a/25373496) for object link - follows `gs://<bucket_name>/<file_path_inside_bucket>` - tf formulation: `${google_storage_bucket.demo_3.url}/${google_storage_bucket_object.demo_3.output_name}`
+- Create tf IAM resources for BigQuery to access sample data object in Storage bucket & transfer ✅
+  - "When you load data into BigQuery, you need permissions that allow you to load data into new or existing BigQuery tables and partitions. If you are loading data from Cloud Storage, you'll also need access to the bucket that contains your data." - [Doc](https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#required_permissions)
+- Create tf resources for Pub/Sub topic & subscription 🚧
+  - _Need to figure out why this is required_
 - Create, test & deploy container image (to Container Registry) using code found [here](https://github.com/googleapis/java-dlp/blob/main/samples/snippets/src/main/java/dlp/snippets/InspectBigQueryTable.java) - parent repo [link](https://github.com/googleapis/java-dlp) for other DLP samples
 - Create tf resources for Cloud Run service & figure out how to invoke service
+- Deploy infrastructure pieces made thus far to be able to perform local testing
 
 ## _demo-4_
 
@@ -108,3 +110,7 @@ Tasks & notes:
   _POST_\
   _PUT/PATCH_\
   _DESTROY_
+
+### notes on resources not used, will sort out/include elsewhere later...
+
+- Even though `location` arg is optional we need to include it or else tf complains that it can't find the dataset - https://github.com/hashicorp/terraform-provider-google/issues/7305
