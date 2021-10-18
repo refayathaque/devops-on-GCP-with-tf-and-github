@@ -50,10 +50,18 @@ Tasks & notes:
 - Create tf IAM resources for BigQuery to access sample data object in Storage bucket & transfer ✅
   - "When you load data into BigQuery, you need permissions that allow you to load data into new or existing BigQuery tables and partitions. If you are loading data from Cloud Storage, you'll also need access to the bucket that contains your data." - [Doc](https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#required_permissions)
 - Create tf resources for Pub/Sub topic & subscription 🚧
-  - _Need to figure out why this is required_
-- Create, test & deploy container image (to Container Registry) using code found [here](https://github.com/googleapis/java-dlp/blob/main/samples/snippets/src/main/java/dlp/snippets/InspectBigQueryTable.java) - parent repo [link](https://github.com/googleapis/java-dlp) for other DLP samples
-- Create tf resources for Cloud Run service & figure out how to invoke service
-- Deploy infrastructure pieces made thus far to be able to perform local testing
+  - _DLP API sample Java code we will be using in subsequent steps requires_
+- Create, test & deploy container image (to Container Registry) using code found [here](https://github.com/googleapis/java-dlp/blob/main/samples/snippets/src/main/java/dlp/snippets/InspectBigQueryTable.java) - parent [repo](https://github.com/googleapis/java-dlp) for other DLP samples 🚧
+  - Figure out how to build the project structure to execute sample DLP API code below
+    - Going with the simple maven project archetype by running `mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-simple -DarchetypeVersion=1.4`. Provided `inspectbigquerytable` for both group id and artifact id and went with the defaults for version and project (which was already set to `inspectbigquerytable`)
+    - More information on maven archetypes [here](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html)
+  - Modify the `pom.xml` file based on what's in the GCP repo above - [link](https://github.com/googleapis/java-dlp/blob/main/samples/install-without-bom/pom.xml)
+    - Only added the dependencies, not sure if everything else is needed, if errors arise later will revisit
+  - Modify main Java file(s) with code found in GCP repo above
+  - Add `cloudbuild.yaml`
+  - Deploy to Container Registry
+  - Create associate tf resources like Cloud Run, Cloud Build, IAM, etc.
+- Test by publishing a message for microservice to pick up and then run all DLP API code
 
 ## _demo-4_
 
