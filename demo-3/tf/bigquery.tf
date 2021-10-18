@@ -4,11 +4,19 @@ resource "google_bigquery_dataset" "demo_3" {
   location = var.region
 }
 
+output "bigquery_dataset_id" {
+  value = google_bigquery_dataset.demo_3.id
+}
+
 resource "google_bigquery_table" "demo_3" {
   dataset_id          = google_bigquery_dataset.demo_3.dataset_id
   deletion_protection = false
   schema              = file("bq_schema.json")
   table_id            = "demo_${var.demo}_table"
+}
+
+output "bigquery_table_id" {
+  value = google_bigquery_table.demo_3.id
 }
 
 resource "google_bigquery_data_transfer_config" "demo_3" {

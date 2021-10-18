@@ -32,11 +32,11 @@ public class InspectBigQueryTable {
 
   public static void main(String[] args) throws Exception {
     // TODO(developer): Replace these variables before running the sample.
-    String projectId = "your-project-id";
-    String bigQueryDatasetId = "your-bigquery-dataset-id";
-    String bigQueryTableId = "your-bigquery-table-id";
-    String topicId = "your-pubsub-topic-id";
-    String subscriptionId = "your-pubsub-subscription-id";
+    String projectId = "wbtg63wxu";
+    String bigQueryDatasetId = "demo_3_dataset";
+    String bigQueryTableId = "demo_3_table";
+    String topicId = "inspectbigquerytable-topic";
+    String subscriptionId = "inspectbigquerytable-subscription";
     inspectBigQueryTable(projectId, bigQueryDatasetId, bigQueryTableId, topicId, subscriptionId);
   }
 
