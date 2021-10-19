@@ -118,9 +118,9 @@ public class InspectBigQueryTable {
       // Wait for job completion semi-synchronously
       // For long jobs, consider using a truly asynchronous execution model such as Cloud Functions
       try {
-        done.get(15, TimeUnit.MINUTES);
+        done.get(30, TimeUnit.MINUTES);
       } catch (TimeoutException e) {
-        System.out.println("Job was not completed after 15 minutes.");
+        System.out.println("Job was not completed after 30 minutes.");
         return;
       } finally {
         subscriber.stopAsync();

@@ -44,7 +44,7 @@ Tasks & notes:
 - Get sample data from [here](https://cloud.google.com/architecture/creating-cloud-dlp-de-identification-transformation-templates-pii-dataset#downloading_the_sampledatas) ✅
 - Create tf resources for bucket & object, object will be a single csv file from the sample data retrieved above ✅
 - Create tf resources for BigQuery dataset, table & data transfer ✅
-  - Get table schema from [here](https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/tree/master/terraform_setup) (repo is assoicated with Cloud Architecture Center tutorial, link above in "Get sample data from") ✅
+  - Get table schema from [here](https://github.com/GoogleCloudPlatform/dlp-dataflow-deidentification/tree/master/terraform_setup) (repo is associated with Cloud Architecture Center tutorial, link above in "Get sample data from") ✅
     - _But it's incorrect - missing 4 columns, which I added myself by looking at the sample data csv, use `bq_schema.json` in project `tf` dir_
   - `data_path_template` requires [specific format](https://stackoverflow.com/a/25373496) for object link - follows `gs://<bucket_name>/<file_path_inside_bucket>` - tf formulation: `${google_storage_bucket.demo_3.url}/${google_storage_bucket_object.demo_3.output_name}`
 - Create tf IAM resources for BigQuery to access sample data object in Storage bucket & transfer ✅
@@ -58,7 +58,9 @@ Tasks & notes:
   - Modify the `pom.xml` file based on what's in the GCP repo above - [link](https://github.com/googleapis/java-dlp/blob/main/samples/install-without-bom/pom.xml)
     - Only added `dependencies` and `properties`, not sure if everything else is needed, if errors arise later will revisit ✅
   - Modify main Java file(s) with code found in GCP repo above ✅
-  - [Run](https://github.com/googleapis/java-dlp/tree/main/samples/snippets#running) the maven project with code above successfully - `mvn exec:java -Dexec.mainClass="inspectbigquerytable.InspectBigQueryTable"`
+  - [Run](https://github.com/googleapis/java-dlp/tree/main/samples/snippets#running) the maven project with code above successfully - `mvn exec:java -Dexec.mainClass="inspectbigquerytable.InspectBigQueryTable"` ✅
+    - Had to create a new service account with DLP User role (roles/dlp.user) as per [doc](https://cloud.google.com/dlp/docs/auth), existing service account (God mode) wasn't working - When trying to run code would keep getting permission errors, would say that I didn't have the `dlp.jobs.create` permission
+    - While the code worked after using this single-role service account, the job would not complete in the 15 minutes allocated by the code author, so changed the job wait time to 30 minutes and it worked
   - Add `cloudbuild.yaml`
   - Deploy to Container Registry
   - Create associate tf resources like Cloud Run, Cloud Build, IAM, etc.
